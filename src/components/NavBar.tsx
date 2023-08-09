@@ -1,26 +1,16 @@
+/* eslint-disable @next/next/no-img-element */
 import { useEffect, useState } from 'react'
-import {
-  ArrowPathIcon,
-  Bars3Icon,
-  ChartPieIcon,
-  CursorArrowRaysIcon,
-  FingerPrintIcon,
-  SquaresPlusIcon,
-  XMarkIcon,
-} from '@heroicons/react/24/outline'
-
-import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/20/solid'
 import Link from 'next/link'
-import { createClient } from '@supabase/supabase-js'
+import { Session, User, createClient } from '@supabase/supabase-js'
 import { useLocalStorage, useReadLocalStorage } from 'usehooks-ts'
 import router from 'next/router'
-import RemoveItem from './RemoveItem'
+import RemoveItem from '../app/data/RemoveItem'
 import { CartPrice } from '../app/data/CartPrice'
 const supabase = createClient('https://kmdxpccclvazdidvtckr.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImttZHhwY2NjbHZhemRpZHZ0Y2tyIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTExNDAwMjcsImV4cCI6MjAwNjcxNjAyN30.hvzOvB242NhDMvezKoUnZODRiC8NYGBTpLbAbh0tVws')
 
 export default function Example() {
   const [Myitems, setItems] = useLocalStorage<Object[]>('items', [])
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState<User>(null)
   const cart_items = useReadLocalStorage<Object[]>('items')
   const [cart_price, setCartPrice] = useState(0)
   
@@ -30,7 +20,7 @@ export default function Example() {
     setCartPrice(0)
   }
 
-  const [session, setSession] = useState(null)
+  const [session, setSession] = useState<Session>(null)
     useEffect(() => {
       supabase.auth.getSession().then(({ data: { session } }) => {
         setSession(session)
@@ -85,7 +75,7 @@ export default function Example() {
             </p>
            
          </div>
-         <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+         <div className="hidden md:inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
             ${item.price}
             
          </div>

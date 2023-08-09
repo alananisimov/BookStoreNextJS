@@ -9,11 +9,9 @@ import { ChakraProvider } from '@chakra-ui/react'
 import Component from '@/components/Test';
 import dynamic from 'next/dynamic'
 import Layout from '@/components/layout';
- 
-const NoSSR = dynamic(() => import('../components/NavBar'), { ssr: false })
 
 export default function Home() {
-  const {Loading, products} = useProducts()
+  const {products} = useProducts()
   
   return (
     <Layout>

@@ -20,21 +20,10 @@ import { StarIcon } from '@heroicons/react/20/solid'
 import { MyProduct } from '@/app/models'
 import { useLocalStorage } from 'usehooks-ts'
 import { useReadLocalStorage } from 'usehooks-ts'
-import RemoveItem from './RemoveItem'
+import RemoveItem from '../app/data/RemoveItem'
 
-interface ProductProps {
-  product_props: MyProduct
-}
-
-function classNames(...classes) {
+function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
-}
-
-interface test {
-  open: boolean
-}
-interface test1 {
-  setOpen: Dispatch<SetStateAction<boolean>>
 }
 
 export default function QuickView({product_props, open, setOpen, usePlus, setPlus}: {product_props: MyProduct, open: boolean, setOpen: Dispatch<SetStateAction<boolean>>, usePlus: number, setPlus: Dispatch<SetStateAction<number>>}) {
@@ -49,9 +38,6 @@ export default function QuickView({product_props, open, setOpen, usePlus, setPlu
   //написать статью
   const addItem = (de: any) => {
   setItems(prevent =>[...prevent, de])
-  }
-  const delItem = () => {
-    setItems(prevent => prevent.splice(1))
   }
 
 const product = {
@@ -159,13 +145,20 @@ const product = {
                             className="bottom-0 mt-20 mr-10 flex w-[100%] items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                           >
                             Добавить в корзину
-                          </button> :<div className='inline-flex text-2xl'><div
-                            className="bottom-0 mt-20 mr-10 flex w-[100%] items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white"
-                          >
-                            <button className='mr-36 w-10 h-10 hover:bg-indigo-800 rounded-md'
-                            onClick={()=>{setPlus(prevent => prevent+1)
-                            addItem(product)}}>+</button>{usePlus}
-                            <button className='ml-36 hover:bg-indigo-800 rounded-md' onClick={()=>{setPlus(prevent => prevent-1)}}><RemoveItem name={product.name} symbol='-'/></button>
+                          </button> :
+                          <div className='inline-flex text-2xl w-full'>
+                            <div className="bottom-0 mt-20 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 py-3 text-base font-medium text-white">
+                            <button className='w-10 h-10 hover:bg-indigo-800 rounded-md'
+                            onClick={()=>{
+                              setPlus(prevent => prevent+1)
+                              addItem(product)
+                              }}>
+                                +
+                              </button>
+                              <div className='mx-auto justify-center text-center items-center'>
+                              {usePlus}
+                              </div>
+                            <button className='w-10 h-10 hover:bg-indigo-800 rounded-md' onClick={()=>{setPlus(prevent => prevent-1)}}><RemoveItem name={product.name} symbol='-'/></button>
                           </div>
                           
                           </div>}

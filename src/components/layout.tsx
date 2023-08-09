@@ -12,7 +12,6 @@ import dynamic from 'next/dynamic'
 const NoSSR = dynamic(() => import('../components/NavBar'), { ssr: false })
 
 export default function Layout({children}) {
-  const {Loading, products} = useProducts()
   
   return (
     <ChakraProvider>

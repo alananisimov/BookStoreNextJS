@@ -1,7 +1,7 @@
 'use client';
 /* eslint-disable @next/next/no-img-element */
 import { MyProduct } from "../app/models"
-import {useEffect, useState} from 'react'
+import { useState } from 'react'
 import { useProducts } from "../app/hooks/products";
 import { Box, Badge} from '@chakra-ui/react'
 import { Skeleton, SkeletonText } from '@chakra-ui/react'
