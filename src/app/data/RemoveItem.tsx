@@ -1,11 +1,12 @@
 import React from 'react';
 import { useLocalStorage } from 'usehooks-ts';
+import { MyProduct } from '../models';
 
-function RemoveItem({ name, symbol }) {
-    const [items, setItems] = useLocalStorage<Object[]>('items', []);
+function RemoveItem({ name, symbol }: {name: string, symbol: string}) {
+    const [items, setItems] = useLocalStorage<MyProduct[]>('items', []);
 
     // Ищем индекс элемента с заданным именем
-    const index = items.findIndex(item => item.name === name);
+    const index = items.findIndex(item => item.title === name);
 
     const removeFromLocalStorage = () => {
         if (index !== -1) {

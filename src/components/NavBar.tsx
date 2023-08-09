@@ -7,12 +7,13 @@ import { useLocalStorage, useReadLocalStorage } from 'usehooks-ts'
 import router from 'next/router'
 import RemoveItem from '../app/data/RemoveItem'
 import { CartPrice } from '../app/data/CartPrice'
+import { MyProduct } from '@/app/models'
 const supabase = createClient('https://kmdxpccclvazdidvtckr.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImttZHhwY2NjbHZhemRpZHZ0Y2tyIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTExNDAwMjcsImV4cCI6MjAwNjcxNjAyN30.hvzOvB242NhDMvezKoUnZODRiC8NYGBTpLbAbh0tVws')
 
 export default function Example() {
   const [Myitems, setItems] = useLocalStorage<Object[]>('items', [])
-  const [user, setUser] = useState<User>(null)
-  const cart_items = useReadLocalStorage<Object[]>('items')
+  const [user, setUser] = useState<User | null>(null)
+  const cart_items = useReadLocalStorage<MyProduct[]>('items')
   const [cart_price, setCartPrice] = useState(0)
   
   function clearCart(){
@@ -21,7 +22,7 @@ export default function Example() {
     setCartPrice(0)
   }
 
-  const [session, setSession] = useState<Session>(null)
+  const [session, setSession] = useState<Session | null>(null)
     useEffect(() => {
       supabase.auth.getSession().then(({ data: { session } }) => {
         setSession(session)
@@ -47,7 +48,7 @@ export default function Example() {
     <div className="navbar bg-base-100">
     <div className="flex-1">
       <img src="/book.jpg" className='w-16 h-16'/>
-      <a href='/' className="btn btn-ghost normal-case text-xl">Книжный уголок</a>
+      <Link href='/' className="btn btn-ghost normal-case text-xl">Книжный уголок</Link>
     </div>
     <div className="flex-none">
       <div className="dropdown dropdown-end">
@@ -68,11 +69,11 @@ export default function Example() {
    <li className="pb-3 sm:pb-4" key={index}>
       <div className="flex items-center space-x-4">
          <div className="flex-shrink-0">
-            <img className="w-8 h-8 rounded-full" src={item.imageSrc} alt={item.imageAlt}/>
+            <img className="w-8 h-8 rounded-full" src={item.image} alt={item.title}/>
          </div>
          <div className="flex-1 min-w-0">
             <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-               {item.name}
+               {item.title}
             </p>
            
          </div>
@@ -81,8 +82,8 @@ export default function Example() {
             
          </div>
          
-           <button className='hover:bg-gray-300 hover:rounded-md w-16 hidden md:flex'><RemoveItem name={item.name} symbol="Удалить"/></button>
-           <button className='hover:bg-gray-300 hover:rounded-md w-16 md:hidden text-2xl'><RemoveItem name={item.name} symbol="-"/></button>
+           <button className='hover:bg-gray-300 hover:rounded-md w-16 hidden md:flex'><RemoveItem name={item.title} symbol="Удалить"/></button>
+           <button className='hover:bg-gray-300 hover:rounded-md w-16 md:hidden text-2xl'><RemoveItem name={item.title} symbol="-"/></button>
 
          
       </div>
