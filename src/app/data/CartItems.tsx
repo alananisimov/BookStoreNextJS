@@ -10,7 +10,7 @@ export default function CartItems(){
    
     return(
         <>
-        {cart_items?.length != 0 ? cart_items?.map((product, index) => <div className="flex flex-col rounded-lg bg-white flex-row" key={index}>
+        {cart_items?.length != 0 ? cart_items?.map((product, index) => <div className="flex flex-col rounded-lg bg-white" key={index}>
           <div className="inline-flex gap-5">
           <img className="m-2 h-24 w-28 rounded-md border object-cover object-center" src={product.image} alt="" />
           <div className="flex-col">
