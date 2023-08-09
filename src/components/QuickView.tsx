@@ -110,7 +110,7 @@ export default function QuickView({product_props, open, setOpen, usePlus, setPlu
                             </div>
                             <p className="sr-only">{product_props.rating.count} out of 5 stars</p>
                             <a href="#" className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">
-                              117 reviews
+                              {product_props.rating.count} reviews
                             </a>
                           </div>
                         </div>

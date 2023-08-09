@@ -20,7 +20,7 @@ function RemoveItem({ name, symbol }: {name: string, symbol: string}) {
 
     return (
         <div>
-            <span onClick={removeFromLocalStorage} className='inline-flex h-10 w-10 items-center text-center justify-center'>
+            <span onClick={removeFromLocalStorage} className='inline-flex w-fit m-1 items-center text-center justify-center'>
                 {String(symbol)} {/* Преобразование символа в строку */}
             </span>
         </div>
