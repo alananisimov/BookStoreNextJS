@@ -2,12 +2,12 @@
 import Layout from "@/components/layout"
 import dynamic from "next/dynamic"
 import { useEffect, useState } from "react"
-import { CartPrice } from "@/components/CartPrice"
+import { CartPrice } from "@/app/data/CartPrice"
 import router from "next/router"
 
 export default function Checkout(){
     
-    const NoSSRCartItems = dynamic(() => import('../../components/CartItems'), { ssr: false })
+    const NoSSRCartItems = dynamic(() => import('../../app/data/CartItems'), { ssr: false })
     
     
     return(

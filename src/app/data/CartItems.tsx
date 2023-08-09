@@ -1,6 +1,5 @@
-import { useState } from "react"
-import { useLocalStorage, useReadLocalStorage } from "usehooks-ts"
-import RemoveItem from "./RemoveItem"
+import { useReadLocalStorage } from "usehooks-ts"
+import RemoveItem from "../../components/RemoveItem"
 
 
 export default function CartItems(){

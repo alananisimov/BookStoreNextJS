@@ -1,5 +1,3 @@
-import { Product } from '../../components/Product'
-import { products } from '../data/products'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { MyProduct } from '../models';
@@ -9,7 +7,7 @@ export function useProducts() {
   let [Loading, setLoading] = useState(Boolean)
   async function FetchProducts() {
     setLoading(true)
-    const response = await axios.get<MyProduct[]>("https://nest-js-store-api.vercel.app/products.json"
+    const response = await axios.get<MyProduct[]>("https://nest-js-store-api.vercel.app/products"
     )
     .finally(() => {setLoading(false)})
 

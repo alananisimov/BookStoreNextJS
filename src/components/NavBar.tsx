@@ -15,7 +15,7 @@ import { createClient } from '@supabase/supabase-js'
 import { useLocalStorage, useReadLocalStorage } from 'usehooks-ts'
 import router from 'next/router'
 import RemoveItem from './RemoveItem'
-import { CartPrice } from './CartPrice'
+import { CartPrice } from '../app/data/CartPrice'
 const supabase = createClient('https://kmdxpccclvazdidvtckr.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImttZHhwY2NjbHZhemRpZHZ0Y2tyIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTExNDAwMjcsImV4cCI6MjAwNjcxNjAyN30.hvzOvB242NhDMvezKoUnZODRiC8NYGBTpLbAbh0tVws')
 
 export default function Example() {
