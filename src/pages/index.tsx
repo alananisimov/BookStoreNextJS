@@ -8,7 +8,7 @@ import { useProducts } from '../app/hooks/products';
 import { ChakraProvider } from '@chakra-ui/react'
 import Component from '@/components/Test';
 import dynamic from 'next/dynamic'
-import Layout from '@/components/layout';
+import Layout from '@/components/Layout';
 
 export default function Home() {
   const {products} = useProducts()

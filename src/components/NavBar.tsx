@@ -17,7 +17,6 @@ export default function Example() {
   const [cart_price, setCartPrice] = useState(0)
   
   function clearCart(){
-    
     setItems([])
     setCartPrice(0)
   }

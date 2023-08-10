@@ -18,9 +18,7 @@ export default function Layout({children}: {children: ReactNode}) {
     <ChakraProvider>
       <NoSSR/>
       <main className="my-12">{children}</main>
-    
-    
-    <BottomNav/>
+      <BottomNav/>
     </ChakraProvider>
   )
 }

@@ -1,5 +1,5 @@
 
-import Layout from "@/components/layout"
+import Layout from "@/components/Layout"
 import dynamic from "next/dynamic"
 import { useEffect, useState } from "react"
 import { CartPrice } from "@/app/data/CartPrice"
