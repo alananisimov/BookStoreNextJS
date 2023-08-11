@@ -1,6 +1,5 @@
 'use client';
 import { BottomNav } from '../components/BottomNav';
-import { Loader } from '../components/Loader';
 import Example from '../components/NavBar';
 import { Product } from '../components/Product'
 import '../app/globals.css'
