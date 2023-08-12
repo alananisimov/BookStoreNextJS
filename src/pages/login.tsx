@@ -9,10 +9,10 @@ import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/router";
 import { createClient, SupabaseClient } from '@supabase/supabase-js'
 import { useEffect, useState } from 'react'
+import { supabase } from '@/app/data/SupabaseClient';
 export default function Login() {
 
 // Create a single supabase client for interacting with your database
-const supabase = createClient('https://kmdxpccclvazdidvtckr.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImttZHhwY2NjbHZhemRpZHZ0Y2tyIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTExNDAwMjcsImV4cCI6MjAwNjcxNjAyN30.hvzOvB242NhDMvezKoUnZODRiC8NYGBTpLbAbh0tVws')
 
 const [user_email, setuserEmail] = useState(String || undefined)
 
@@ -20,7 +20,10 @@ const [user_email, setuserEmail] = useState(String || undefined)
 
   async function Google_login() {
     let { data, error } = await supabase.auth.signInWithOAuth({
-      provider: 'google'
+      provider: 'google',
+      //options: {
+      //  redirectTo: 'http://localhost:3000'
+      //}
     })
   }
   return (

@@ -7,7 +7,7 @@ export function CartPrice() {
     const [total, setTotal] = useState<number>(0);
 
     useEffect(() => {
-        if (cart_items) {
+        if (cart_items) { 
             const newTotal = cart_items.reduce((acc, item) => acc + item.price, 0);
             setTotal(newTotal);
         }

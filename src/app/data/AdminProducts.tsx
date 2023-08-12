@@ -21,7 +21,7 @@ export default function AdminProducts(){
     return(
         <>
         {isUpdate &&  <UpdateModal product_props={curProduct} setOpen={setUpdate}/>}
-       <div className="container mx-auto grid-cols-3 grid gap-16">
+       <div className="container mx-auto grid-cols-1 md:grid-cols-3 grid gap-16">
         {products?.length != 0 ? products?.map((product, index) => 
          
            

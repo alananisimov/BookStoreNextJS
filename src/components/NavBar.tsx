@@ -8,7 +8,8 @@ import router from 'next/router'
 import RemoveItem from '../app/data/RemoveItem'
 import { CartPrice } from '../app/data/CartPrice'
 import { MyProduct } from '@/app/models'
-const supabase = createClient('https://kmdxpccclvazdidvtckr.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImttZHhwY2NjbHZhemRpZHZ0Y2tyIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTExNDAwMjcsImV4cCI6MjAwNjcxNjAyN30.hvzOvB242NhDMvezKoUnZODRiC8NYGBTpLbAbh0tVws')
+import { supabase } from '@/app/data/SupabaseClient'
+
 
 export default function Example() {
   const [Myitems, setItems] = useLocalStorage<Object[]>('items', [])

@@ -7,10 +7,12 @@ export function useProducts() {
   let [Loading, setLoading] = useState(Boolean)
   async function FetchProducts() {
     setLoading(true)
-    const response = await axios.get("https://web-production-7dc2.up.railway.app/https://nestjsstoreapi-production.up.railway.app/products", {headers: {
+    const response = await axios.get<MyProduct[]>("https://web-production-7dc2.up.railway.app/https://nestjsstoreapi-production.up.railway.app/products", {headers: {
       "X-Requested-With": "XMLHttpRequest"
     },})
-    .finally(() => {setLoading(false)})
+    .finally(() => {
+      setLoading(false)
+    })
 
     console.log(response)
     setProducts(response.data)
