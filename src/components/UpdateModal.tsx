@@ -21,7 +21,7 @@ interface Product {
 }
 
 export default function UpdateModal({product_props, setOpen}: {product_props:MyProduct|undefined, setOpen: any}) {
-  const UpdateProduct = async (event) =>{
+  const UpdateProduct = async (event: any) =>{
     event.preventDefault();
     const response = await axios.patch("https://web-production-7dc2.up.railway.app/https://nestjsstoreapi-production.up.railway.app/products/editbyid/" + product_props?.id, JSON.parse(event.target.about.value))
     console.log(response);
