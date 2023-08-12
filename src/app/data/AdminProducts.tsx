@@ -23,7 +23,7 @@ export default function AdminProducts(){
         {isUpdate &&  <UpdateModal product_props={curProduct} setOpen={setUpdate}/>}
        <div className="container mx-auto grid-cols-3 grid gap-16">
         {products?.length != 0 ? products?.map((product, index) => 
-         <>
+         
            
          <div className="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7]" key={index}>
    <div className="p-4 md:p-5">
@@ -49,7 +49,7 @@ export default function AdminProducts(){
      </div>
    </div>
  </div>
-         </>
+         
         ): "no items"}
         </div>
         </>

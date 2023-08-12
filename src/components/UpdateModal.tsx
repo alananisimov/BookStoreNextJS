@@ -14,14 +14,20 @@
 */
 import { MyProduct } from '@/app/models'
 import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid'
+import axios from 'axios';
 
 interface Product {
     product_props: MyProduct | undefined
 }
 
 export default function UpdateModal({product_props, setOpen}: {product_props:MyProduct|undefined, setOpen: any}) {
+  const UpdateProduct = async (event) =>{
+    event.preventDefault();
+    const response = await axios.patch("https://web-production-7dc2.up.railway.app/https://nestjsstoreapi-production.up.railway.app/products/editbyid/" + product_props?.id, JSON.parse(event.target.about.value))
+    console.log(response);
+  }
   return (
-    <form className='mx-auto my-12 max-w-md'>
+    <form className='mx-auto my-12 max-w-md' onSubmit={UpdateProduct}>
       <div className="space-y-12">
         <div className="border-b border-gray-900/10 pb-12">
           <h2 className="text-base font-semibold leading-7 text-gray-900">{product_props?.title}</h2>
