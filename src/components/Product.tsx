@@ -60,7 +60,7 @@ export function Product({product}: ProductProps){
       
         <Box display='flex' className="mt-2">
         
-        {!Loading &&  Array(Math.round(product.rating.rate))
+        {!Loading &&  Array(Math.round(product.rate))
             .fill('')
             .map((_, i) => (
               <AiOutlineStar
@@ -71,7 +71,7 @@ export function Product({product}: ProductProps){
          
         <SkeletonText isLoaded={!Loading}>
           <Box as='span' ml='2' color='gray.600' fontSize='sm' >
-            {product.rating.count} отзывов
+            {product.count} отзывов
           </Box>
           </SkeletonText>
         </Box>

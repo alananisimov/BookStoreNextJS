@@ -5,8 +5,6 @@ export interface MyProduct {
     description: string
     image: string
     category: string
-    rating: {
-        rate: number
-        count: number
-    }
+    rate: number
+    count: number
 }

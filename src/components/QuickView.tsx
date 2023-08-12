@@ -101,16 +101,16 @@ export default function QuickView({product_props, open, setOpen, usePlus, setPlu
                                 <StarIcon
                                   key={rating}
                                   className={classNames(
-                                    product_props.rating.rate > rating ? 'text-gray-900' : 'text-gray-200',
+                                    product_props.rate > rating ? 'text-gray-900' : 'text-gray-200',
                                     'h-5 w-5 flex-shrink-0'
                                   )}
                                   aria-hidden="true"
                                 />
                               ))}
                             </div>
-                            <p className="sr-only">{product_props.rating.count} out of 5 stars</p>
+                            <p className="sr-only">{product_props.count} out of 5 stars</p>
                             <a href="#" className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">
-                              {product_props.rating.count} reviews
+                              {product_props.count} reviews
                             </a>
                           </div>
                         </div>

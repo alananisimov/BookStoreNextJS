@@ -7,7 +7,7 @@ export function useProducts() {
   let [Loading, setLoading] = useState(Boolean)
   async function FetchProducts() {
     setLoading(true)
-    const response = await axios.get("https://nest-js-store-api.vercel.app/products"
+    const response = await axios.get("https://nestjsstoreapi-production.up.railway.app/products"
     )
     .finally(() => {setLoading(false)})
 
