@@ -13,6 +13,7 @@ const NoSSR = dynamic(() => import("../components/NavBar"), { ssr: false });
 export default function Layout({ children }: { children: ReactNode }) {
   return (
     <ChakraProvider>
+      <link rel="icon" href="/favicon.ico" sizes="any" />
       <NoSSR />
       <main className="my-12">{children}</main>
       <BottomNav />
