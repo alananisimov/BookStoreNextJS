@@ -12,35 +12,46 @@
   }
   ```
 */
-import { MyProduct } from '@/app/models'
-import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid'
-import axios from 'axios';
+import { MyProduct } from "@/app/models";
+import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
+import axios from "axios";
 
 interface Product {
-    product_props: MyProduct | undefined
+  product_props: MyProduct | undefined;
 }
 
-export default function UpdateModal({product_props, setOpen}: {product_props:MyProduct|undefined, setOpen: any}) {
-  const UpdateProduct = async (event: any) =>{
+export default function UpdateModal({
+  product_props,
+  setOpen,
+}: {
+  product_props: MyProduct | undefined;
+  setOpen: any;
+}) {
+  const UpdateProduct = async (event: any) => {
     event.preventDefault();
-    const response = await axios.patch("https://web-production-7dc2.up.railway.app/https://nestjsstoreapi-production.up.railway.app/products/editbyid/" + product_props?.id, JSON.parse(event.target.about.value))
+    const response = await axios.patch(
+      "https://web-production-7dc2.up.railway.app/https://nestjsstoreapi-production.up.railway.app/products/editbyid/" +
+        product_props?.id,
+      JSON.parse(event.target.about.value)
+    );
     console.log(response);
-  }
+  };
   return (
-    <form className='mx-auto my-12 max-w-md' onSubmit={UpdateProduct}>
+    <form className="mx-auto my-12 max-w-md" onSubmit={UpdateProduct}>
       <div className="space-y-12">
         <div className="border-b border-gray-900/10 pb-12">
-          <h2 className="text-base font-semibold leading-7 text-gray-900">{product_props?.title}</h2>
-          
+          <h2 className="text-base font-semibold leading-7 text-gray-900">
+            {product_props?.title}
+          </h2>
 
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-            <div className="sm:col-span-4">
-              
-              
-            </div>
+            <div className="sm:col-span-4"></div>
 
             <div className="col-span-full">
-              <label htmlFor="about" className="block text-sm font-medium leading-6 text-gray-900">
+              <label
+                htmlFor="about"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
                 Информация о продукте
               </label>
               <div className="mt-2">
@@ -52,22 +63,22 @@ export default function UpdateModal({product_props, setOpen}: {product_props:MyP
                   defaultValue={JSON.stringify(product_props, null, 4)}
                 />
               </div>
-              <p className="mt-3 text-sm leading-6 text-gray-600">Просто обновите json файл для и нажмите {'"сохранить"'}</p>
+              <p className="mt-3 text-sm leading-6 text-gray-600">
+                Просто обновите json файл для и нажмите {'"сохранить"'}
+              </p>
             </div>
-
-           
           </div>
         </div>
-
-        
-
-       
-           
-          </div>
-        
+      </div>
 
       <div className="mt-6 flex items-center justify-end gap-x-6">
-        <button type="button" className="text-sm font-semibold leading-6 text-gray-900" onClick={()=>{setOpen(false)}}>
+        <button
+          type="button"
+          className="text-sm font-semibold leading-6 text-gray-900"
+          onClick={() => {
+            setOpen(false);
+          }}
+        >
           Отменить
         </button>
         <button
@@ -78,5 +89,5 @@ export default function UpdateModal({product_props, setOpen}: {product_props:MyP
         </button>
       </div>
     </form>
-  )
+  );
 }

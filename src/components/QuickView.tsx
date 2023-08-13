@@ -13,22 +13,33 @@
   }
   ```
 */
-import { Dispatch, Fragment, SetStateAction, useEffect, useState } from 'react'
-import { Dialog, RadioGroup, Transition } from '@headlessui/react'
-import { XMarkIcon } from '@heroicons/react/24/outline'
-import { StarIcon } from '@heroicons/react/20/solid'
-import { MyProduct } from '@/app/models'
-import { useLocalStorage } from 'usehooks-ts'
-import { useReadLocalStorage } from 'usehooks-ts'
-import RemoveItem from '../app/data/RemoveItem'
+import { Dispatch, Fragment, SetStateAction, useEffect, useState } from "react";
+import { Dialog, RadioGroup, Transition } from "@headlessui/react";
+import { XMarkIcon } from "@heroicons/react/24/outline";
+import { StarIcon } from "@heroicons/react/20/solid";
+import { MyProduct } from "@/app/models";
+import { useLocalStorage } from "usehooks-ts";
+import { useReadLocalStorage } from "usehooks-ts";
+import RemoveItem from "../app/data/RemoveItem";
 
 function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(" ");
 }
 
-export default function QuickView({product_props, open, setOpen, usePlus, setPlus}: {product_props: MyProduct, open: boolean, setOpen: Dispatch<SetStateAction<boolean>>, usePlus: number, setPlus: Dispatch<SetStateAction<number>>}) {
-  
-  const [Myitems, setItems] = useLocalStorage<Array<String>>('items', [])
+export default function QuickView({
+  product_props,
+  open,
+  setOpen,
+  usePlus,
+  setPlus,
+}: {
+  product_props: MyProduct;
+  open: boolean;
+  setOpen: Dispatch<SetStateAction<boolean>>;
+  usePlus: number;
+  setPlus: Dispatch<SetStateAction<number>>;
+}) {
+  const [Myitems, setItems] = useLocalStorage<Array<String>>("items", []);
 
   //написать статью
   //написать статью
@@ -36,14 +47,18 @@ export default function QuickView({product_props, open, setOpen, usePlus, setPlu
   //написать статью
   //написать статью
   const addItem = (de: any) => {
-  setItems(prevent =>[...prevent, de])
-  }
+    setItems((prevent) => [...prevent, de]);
+  };
 
-  
   return (
     <Transition.Root show={open} as={Fragment}>
-      
-      <Dialog as="div" className="relative z-10" onClose={()=>{setOpen(false)}}>
+      <Dialog
+        as="div"
+        className="relative z-10"
+        onClose={() => {
+          setOpen(false);
+        }}
+      >
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -80,17 +95,28 @@ export default function QuickView({product_props, open, setOpen, usePlus, setPlu
 
                   <div className="grid w-full grid-cols-1 items-center gap-x-6 gap-y-8 sm:grid-cols-12 lg:gap-x-8">
                     <div className="aspect-h-3 aspect-w-2 overflow-hidden col-span-2 rounded-lg bg-gray-100 sm:col-span-4 lg:col-span-5">
-                      <img src={product_props.image} alt={product_props.image} className="object-cover object-center"/>
+                      <img
+                        src={product_props.image}
+                        alt={product_props.image}
+                        className="object-cover object-center"
+                      />
                     </div>
                     <div className="sm:col-span-8 lg:col-span-7">
-                      <h2 className="text-2xl font-bold text-gray-900 sm:pr-12">{product_props.title}</h2>
+                      <h2 className="text-2xl font-bold text-gray-900 sm:pr-12">
+                        {product_props.title}
+                      </h2>
 
-                      <section aria-labelledby="information-heading" className="mt-2">
+                      <section
+                        aria-labelledby="information-heading"
+                        className="mt-2"
+                      >
                         <h3 id="information-heading" className="sr-only">
                           Product information
                         </h3>
 
-                        <p className="text-2xl text-gray-900">{product_props.price} USD</p>
+                        <p className="text-2xl text-gray-900">
+                          {product_props.price} USD
+                        </p>
 
                         {/* Reviews */}
                         <div className="mt-6">
@@ -101,58 +127,82 @@ export default function QuickView({product_props, open, setOpen, usePlus, setPlu
                                 <StarIcon
                                   key={rating}
                                   className={classNames(
-                                    product_props.rate > rating ? 'text-gray-900' : 'text-gray-200',
-                                    'h-5 w-5 flex-shrink-0'
+                                    product_props.rate > rating
+                                      ? "text-gray-900"
+                                      : "text-gray-200",
+                                    "h-5 w-5 flex-shrink-0"
                                   )}
                                   aria-hidden="true"
                                 />
                               ))}
                             </div>
-                            <p className="sr-only">{product_props.count} out of 5 stars</p>
-                            <a href="#" className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">
+                            <p className="sr-only">
+                              {product_props.count} out of 5 stars
+                            </p>
+                            <a
+                              href="#"
+                              className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500"
+                            >
                               {product_props.count} reviews
                             </a>
                           </div>
                         </div>
                       </section>
 
-                      <section aria-labelledby="options-heading" className="mt-10">
+                      <section
+                        aria-labelledby="options-heading"
+                        className="mt-10"
+                      >
                         <h3 id="options-heading" className="sr-only">
                           Product options
                         </h3>
 
-                        
-                          {/* Colors */}
-                          <div>
-                            <h4 className="text-sm font-medium text-gray-900">Description</h4>
-                            <h2>{product_props.description}</h2>
-                            
-                          </div>
-                          {usePlus == 0 ? <button
-                            onClick={()=>{addItem(product_props)
-                              setPlus(prevent => prevent +1 )
+                        {/* Colors */}
+                        <div>
+                          <h4 className="text-sm font-medium text-gray-900">
+                            Description
+                          </h4>
+                          <h2>{product_props.description}</h2>
+                        </div>
+                        {usePlus == 0 ? (
+                          <button
+                            onClick={() => {
+                              addItem(product_props);
+                              setPlus((prevent) => prevent + 1);
                             }}
                             className="bottom-0 mt-20 mr-10 flex w-[100%] items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                           >
                             Добавить в корзину
-                          </button> :
-                          <div className='inline-flex text-2xl w-full'>
+                          </button>
+                        ) : (
+                          <div className="inline-flex text-2xl w-full">
                             <div className="bottom-0 mt-20 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 py-3 text-base font-medium text-white">
-                            <button className='w-10 h-10 hover:bg-indigo-800 rounded-md'
-                            onClick={()=>{
-                              setPlus(prevent => prevent+1)
-                              addItem(product_props)
-                              }}>
+                              <button
+                                className="w-10 h-10 hover:bg-indigo-800 rounded-md"
+                                onClick={() => {
+                                  setPlus((prevent) => prevent + 1);
+                                  addItem(product_props);
+                                }}
+                              >
                                 +
                               </button>
-                              <div className='mx-auto justify-center text-center items-center'>
-                              {usePlus}
+                              <div className="mx-auto justify-center text-center items-center">
+                                {usePlus}
                               </div>
-                            <button className='w-10 h-10 hover:bg-indigo-800 rounded-md' onClick={()=>{setPlus(prevent => prevent-1)}}><RemoveItem name={product_props.title} symbol='-'/></button>
+                              <button
+                                className="w-10 h-10 hover:bg-indigo-800 rounded-md"
+                                onClick={() => {
+                                  setPlus((prevent) => prevent - 1);
+                                }}
+                              >
+                                <RemoveItem
+                                  name={product_props.title}
+                                  symbol="-"
+                                />
+                              </button>
+                            </div>
                           </div>
-                          
-                          </div>}
-                        
+                        )}
                       </section>
                     </div>
                   </div>
@@ -163,5 +213,5 @@ export default function QuickView({product_props, open, setOpen, usePlus, setPlu
         </div>
       </Dialog>
     </Transition.Root>
-  )
+  );
 }
