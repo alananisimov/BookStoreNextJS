@@ -28,18 +28,18 @@ export function Product({ product }: ProductProps) {
           borderWidth="1px"
           borderRadius="lg"
           overflow="hidden"
-          className="m-6 md:h-96 relative group hover:cursor-pointer"
+          className="m-6 md:h-96 relative group hover:cursor-pointer "
         >
           <Skeleton isLoaded={!Loading} className="m-6 h-40">
             <img
               src={product.image}
               alt={product.title}
-              className="m-6 max-w-[150px] max-h-[200px] relative group-hover:blur-sm"
+              className="m-6 max-w-[150px] max-h-[200px] relative group-hover:blur-sm "
             />
           </Skeleton>
           <Box p="6" className="md:absolute md:bottom-0">
             <Skeleton isLoaded={!Loading}>
-              <Box display="flex" alignItems="baseline">
+              <Box display="flex" alignItems="baseline" className="">
                 <Badge borderRadius="full" px="2" colorScheme="teal">
                   Новинка
                 </Badge>
