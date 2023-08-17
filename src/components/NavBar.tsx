@@ -10,7 +10,7 @@ import { CartPrice } from "../app/data/CartPrice";
 import { MyProduct } from "@/app/models";
 import { supabase } from "@/app/data/SupabaseClient";
 import { useSession } from "@/app/hooks/session_data";
-
+import { Icon } from "@iconify/react";
 export default function Example() {
   const [Myitems, setItems] = useLocalStorage<Object[]>("items", []);
   const [user, setUser] = useState<User | null>(null);
@@ -151,15 +151,16 @@ export default function Example() {
             <li>
               <a className="justify-between">Профиль</a>
             </li>
-            {role !== "user" && (
-              <li
-                onClick={() => {
-                  router.push("/admin");
-                }}
-              >
-                <a className="justify-between">Админ-панель</a>
-              </li>
-            )}
+            {role !== "user" ||
+              (session && (
+                <li
+                  onClick={() => {
+                    router.push("/admin");
+                  }}
+                >
+                  <a className="justify-between">Админ-панель</a>
+                </li>
+              ))}
             <li>
               <a>Настройки</a>
             </li>

@@ -3,12 +3,9 @@ import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import { CartPrice } from "@/app/data/CartPrice";
 import router from "next/router";
+import CartItems from "@/app/data/CartItems";
 
 export default function Checkout() {
-  const NoSSRCartItems = dynamic(() => import("../../app/data/CartItems"), {
-    ssr: false,
-  });
-
   return (
     <Layout>
       <div
@@ -97,7 +94,7 @@ export default function Checkout() {
             Проверьте ваши покупки и оставьте реквизиты для оплаты
           </p>
           <div className="mt-8 space-y-3 rounded-lg border bg-white px-2 py-4 sm:px-6">
-            <NoSSRCartItems />
+            <CartItems />
           </div>
         </div>
         <div className="mt-10 bg-gray-50 px-4 pt-8 lg:mt-0">

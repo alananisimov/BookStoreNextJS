@@ -20,14 +20,14 @@ interface Product {
   product_props: MyProduct | undefined;
 }
 
-export default function UpdateModal({
+export default function AddModal({
   product_props,
   setOpen,
 }: {
   product_props: MyProduct | undefined;
   setOpen: any;
 }) {
-  const UpdateProduct = async (event: any) => {
+  const AddProduct = async (event: any) => {
     event.preventDefault();
     const auth_req = axios.post<auth_key>(
       "https://api.bookconer.site/auth/login",
@@ -46,7 +46,7 @@ export default function UpdateModal({
       console.log(data.data.access_token);
       console.log(event.target.about.value);
       const response = await axios.patch(
-        `https://nestjsstoreapi-production.up.railway.app/products/editbyid/${product_props?.id}`,
+        `https://nestjsstoreapi-production.up.railway.app/products/add`,
         JSON.parse(event.target.about.value),
         {
           headers: {
@@ -58,7 +58,7 @@ export default function UpdateModal({
     });
   };
   return (
-    <form className="mx-auto my-12 max-w-md" onSubmit={UpdateProduct}>
+    <form className="mx-auto my-12 max-w-md" onSubmit={AddProduct}>
       <div className="space-y-12">
         <div className="border-b border-gray-900/10 pb-12">
           <h2 className="text-base font-semibold leading-7 text-gray-900">

@@ -12,9 +12,6 @@ function RemoveItem({ name, symbol }: { name: string; symbol: string }) {
     if (index !== -1) {
       const updatedItems = items.filter((_, i) => i !== index);
       setItems(updatedItems);
-      console.log(`Объект с именем "${name}" удален из массива.`);
-    } else {
-      console.log(`Объект с именем "${name}" не найден в массиве.`);
     }
   };
 

@@ -9,7 +9,7 @@ export default function CartItems() {
 
   return (
     <>
-      {cart_items?.length != 0 ? (
+      {cart_items?.length != 0 && cart_items?.at(0) != undefined ? (
         cart_items?.map((product, index) => (
           <div className="flex flex-col rounded-lg bg-white" key={index}>
             <div className="inline-flex gap-5">
