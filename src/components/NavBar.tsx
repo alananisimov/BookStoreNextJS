@@ -13,34 +13,15 @@ import { useSession } from "@/app/hooks/session_data";
 import { Icon } from "@iconify/react";
 export default function Example() {
   const [Myitems, setItems] = useLocalStorage<Object[]>("items", []);
-  const [user, setUser] = useState<User | null>(null);
   const cart_items = useReadLocalStorage<MyProduct[]>("items");
   const [cart_price, setCartPrice] = useState(0);
-  const [session_d, role] = useSession();
+
   function clearCart() {
     setItems([]);
     setCartPrice(0);
   }
-
-  const [session, setSession] = useState<Session | null>(null);
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-    });
-    supabase.auth.getUser().then(({ data: { user } }) => {
-      setUser(user);
-    });
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-    });
-
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-    });
-  }, []);
-  if (user) console.log(user.user_metadata.avatar_url);
+  const [session, role] = useSession();
+  if (session) console.log(session.user.user_metadata.avatar_url);
   return (
     <div className="navbar bg-base-100">
       <div className="flex-1">
@@ -140,7 +121,11 @@ export default function Example() {
           <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
             <div className="w-10 rounded-full">
               <img
-                src={user ? user.user_metadata.avatar_url : "/profile.png"}
+                src={
+                  session
+                    ? session.user.user_metadata.avatar_url
+                    : "/profile.png"
+                }
               />
             </div>
           </label>
@@ -151,16 +136,15 @@ export default function Example() {
             <li>
               <a className="justify-between">Профиль</a>
             </li>
-            {role !== "user" ||
-              (session && (
-                <li
-                  onClick={() => {
-                    router.push("/admin");
-                  }}
-                >
-                  <a className="justify-between">Админ-панель</a>
-                </li>
-              ))}
+            {role != "user" && (
+              <li
+                onClick={() => {
+                  router.push("/admin");
+                }}
+              >
+                <a className="justify-between">Админ-панель</a>
+              </li>
+            )}
             <li>
               <a>Настройки</a>
             </li>

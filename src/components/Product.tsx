@@ -7,7 +7,7 @@ import { Box, Badge } from "@chakra-ui/react";
 import { Skeleton, SkeletonText } from "@chakra-ui/react";
 import { AiOutlineStar } from "react-icons/ai";
 import QuickView from "./QuickView";
-
+import Image from "next/image";
 interface ProductProps {
   product: MyProduct;
 }
@@ -31,9 +31,12 @@ export function Product({ product }: ProductProps) {
           className="m-6 md:h-96 relative group hover:cursor-pointer "
         >
           <Skeleton isLoaded={!Loading} className="m-6 h-40">
-            <img
+            <Image
               src={product.image}
               alt={product.title}
+              priority={true}
+              width={"200"}
+              height={"200"}
               className="m-6 max-w-[150px] max-h-[200px] relative group-hover:blur-sm "
             />
           </Skeleton>

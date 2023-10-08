@@ -13,7 +13,7 @@ export function useSession() {
       .from("profiles")
       .select("role")
       .then(({ data: profiles, error }) => {
-        SetRole(profiles![0].role);
+        if (profiles != null) SetRole(profiles![0].role);
       });
     console.log(role);
   }, [role]);

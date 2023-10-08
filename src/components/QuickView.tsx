@@ -17,10 +17,13 @@ import { Dispatch, Fragment, SetStateAction, useEffect, useState } from "react";
 import { Dialog, RadioGroup, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { StarIcon } from "@heroicons/react/20/solid";
-import { MyProduct } from "@/app/models";
+import { MyProduct, ReviewProps } from "@/app/models";
 import { useLocalStorage } from "usehooks-ts";
 import { useReadLocalStorage } from "usehooks-ts";
 import RemoveItem from "../app/data/RemoveItem";
+import { Stats } from "./Stats";
+import { Book } from "./Model";
+import Review from "./Review";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -40,7 +43,16 @@ export default function QuickView({
   setPlus: Dispatch<SetStateAction<number>>;
 }) {
   const [Myitems, setItems] = useLocalStorage<Array<String>>("items", []);
-
+  const testReview: ReviewProps = {
+    name: "Alexander",
+    date: "",
+    header: "",
+    photo_url: "https://via.placeholder.com/360x540",
+    stars: 4,
+    text: "Очень хорошая книга! Моему сыну как раз по душе. Читаем всей семьей",
+    avatar_url:
+      "https://fastly.picsum.photos/id/1/200/200.jpg?hmac=jZB9EZ0Vtzq-BZSmo7JKBBKJLW46nntxq79VMkCiBG8",
+  };
   //написать статью
   //написать статью
   //написать статью
@@ -94,12 +106,8 @@ export default function QuickView({
                   </button>
 
                   <div className="grid w-full grid-cols-1 items-center gap-x-6 gap-y-8 sm:grid-cols-12 lg:gap-x-8">
-                    <div className="aspect-h-3 aspect-w-2 overflow-hidden col-span-2 rounded-lg bg-gray-100 sm:col-span-4 lg:col-span-5">
-                      <img
-                        src={product_props.image}
-                        alt={product_props.image}
-                        className="object-cover object-center"
-                      />
+                    <div className="aspect-h-3 aspect-w-2 overflow-hidden col-span-2 rounded-lg bg-gray-100 sm:col-span-4 lg:col-span-5 min-h-full">
+                      <Book baseTexture={product_props.image} />
                     </div>
                     <div className="sm:col-span-8 lg:col-span-7">
                       <h2 className="text-2xl font-bold text-gray-900 sm:pr-12">
@@ -115,12 +123,12 @@ export default function QuickView({
                         </h3>
 
                         <p className="text-2xl text-gray-900">
-                          {product_props.price} USD
+                          {product_props.price} RUB
                         </p>
 
                         {/* Reviews */}
                         <div className="mt-6">
-                          <h4 className="sr-only">Reviews</h4>
+                          <h4 className="sr-only">Отзывы</h4>
                           <div className="flex items-center">
                             <div className="flex items-center">
                               {[0, 1, 2, 3, 4].map((rating) => (
@@ -137,13 +145,13 @@ export default function QuickView({
                               ))}
                             </div>
                             <p className="sr-only">
-                              {product_props.count} out of 5 stars
+                              {product_props.count} из 5 звезд
                             </p>
                             <a
                               href="#"
                               className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500"
                             >
-                              {product_props.count} reviews
+                              {product_props.count} отзывов
                             </a>
                           </div>
                         </div>
@@ -170,13 +178,13 @@ export default function QuickView({
                               addItem(product_props);
                               setPlus((prevent) => prevent + 1);
                             }}
-                            className="bottom-0 mt-20 mr-10 flex w-[100%] items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                            className="bottom-0 mt-10 flex w-[100%] items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                           >
                             Добавить в корзину
                           </button>
                         ) : (
                           <div className="inline-flex text-2xl w-full">
-                            <div className="bottom-0 mt-20 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 py-3 text-base font-medium text-white">
+                            <div className="bottom-0 mt-10 px-5 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 py-1 text-base font-medium text-white">
                               <button
                                 className="w-10 h-10 hover:bg-indigo-800 rounded-md"
                                 onClick={() => {
@@ -204,6 +212,10 @@ export default function QuickView({
                           </div>
                         )}
                       </section>
+                    </div>
+                    <div className="w-full col-span-full">
+                      <Stats product_props={product_props} />
+                      <Review review_props={testReview} />
                     </div>
                   </div>
                 </div>
