@@ -1,17 +1,29 @@
 "use client";
 
-import { useRef } from "react";
+import { Dispatch, SetStateAction, useRef, useState } from "react";
 import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { Mesh, TextureLoader } from "three";
 import * as THREE from "three";
-function MeshComponent({ baseTexture }: { baseTexture: string }) {
+function MeshComponent({
+  baseTexture,
+  isModelLoaded,
+  setModelLoaded,
+}: {
+  baseTexture: string;
+  isModelLoaded: boolean;
+  setModelLoaded: Dispatch<SetStateAction<boolean>>;
+}) {
   const fileUrl = "/book/scene.gltf";
   const mesh = useRef<Mesh>(null!);
   const gltf = useLoader(GLTFLoader, fileUrl);
-
-  const texture = useLoader(TextureLoader, baseTexture);
+  const texture = useLoader(TextureLoader, baseTexture, (loader) => {
+    loader.load(baseTexture, () => {
+      setModelLoaded(true);
+      console.log("Model loaded");
+    });
+  });
 
   gltf.scene.traverse((child) => {
     if (child instanceof THREE.Mesh) {
@@ -20,6 +32,7 @@ function MeshComponent({ baseTexture }: { baseTexture: string }) {
       child.material.map = texture;
     }
   });
+
   useFrame(() => {
     mesh.current.rotation.y += 0.004;
   });
@@ -30,7 +43,15 @@ function MeshComponent({ baseTexture }: { baseTexture: string }) {
   );
 }
 
-export function Book({ baseTexture }: { baseTexture: string }) {
+export function Book({
+  baseTexture,
+  isModelLoaded,
+  setModelLoaded,
+}: {
+  baseTexture: string;
+  isModelLoaded: boolean;
+  setModelLoaded: Dispatch<SetStateAction<boolean>>;
+}) {
   return (
     <div className="w-full h-full mx-auto">
       <div
@@ -41,7 +62,11 @@ export function Book({ baseTexture }: { baseTexture: string }) {
           <OrbitControls enableDamping enablePan={false} />
           <ambientLight />
           <pointLight position={[10, 10, 10]} />
-          <MeshComponent baseTexture={baseTexture} />
+          <MeshComponent
+            baseTexture={baseTexture}
+            isModelLoaded={isModelLoaded}
+            setModelLoaded={setModelLoaded}
+          />
         </Canvas>
       </div>
     </div>

@@ -26,7 +26,7 @@ export default function Review({
       <ReviewItem review_props={review_props} />
 
       <div
-        className="bg-gray-100 mx-8 w-2/3 cursor-zoom-in relative h-full justify-center rounded-box group hidden sm:block"
+        className="bg-gray-100 mx-8 w-2/3 cursor-zoom-in relative h-full justify-center rounded-box group"
         onClick={() => {
           onOpen();
         }}
@@ -51,7 +51,11 @@ export default function Review({
           </div>
         </div>
       </div>
-      <button className="bottom-0 mt-10 flex w-[100%] items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 m-4">
+      <div className="mx-8 my-2 text-sm">
+        <span className="font-bold">От покупателя:</span>
+        {" " + review_props.text}
+      </div>
+      <button className="bottom-0 right-0 left-0 mt-10 flex items-center justify-center rounded-md bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 m-4">
         Посмотреть все отзывы
       </button>
     </>

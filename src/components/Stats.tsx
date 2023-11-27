@@ -20,7 +20,16 @@ function getRatingDescription(rating: number) {
 }
 export function Stats({ product_props }: { product_props: MyProduct }) {
   const description = getRatingDescription(product_props.rate);
-
+  const testReview: ReviewProps = {
+    name: "Alexander",
+    date: "",
+    header: "",
+    photo_url: "https://placehold.co/360x540/png",
+    stars: 4,
+    text: "Очень хорошая книга! Моему сыну как раз по душе. Читаем всей семьей",
+    avatar_url:
+      "https://fastly.picsum.photos/id/1/200/200.jpg?hmac=jZB9EZ0Vtzq-BZSmo7JKBBKJLW46nntxq79VMkCiBG8",
+  };
   return (
     <>
       <div className="hidden sm:flex flex-col w-full">
@@ -50,6 +59,7 @@ export function Stats({ product_props }: { product_props: MyProduct }) {
             </div>
           ))}
         </div>
+        <Review review_props={testReview} />
       </div>
 
       <div className="flex sm:hidden flex-col bg-white border shadow-sm rounded-xl dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7]">
@@ -80,6 +90,7 @@ export function Stats({ product_props }: { product_props: MyProduct }) {
             </div>
           ))}
         </div>
+        <Review review_props={testReview} />
       </div>
     </>
   );

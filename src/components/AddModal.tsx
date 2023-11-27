@@ -46,7 +46,7 @@ export default function AddModal({
       console.log(data.data.access_token);
       console.log(event.target.about.value);
       const response = await axios.patch(
-        `https://nestjsstoreapi-production.up.railway.app/products/add`,
+        `https://api.bookconer.site/auth/products/add`,
         JSON.parse(event.target.about.value),
         {
           headers: {

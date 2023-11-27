@@ -1,10 +1,3 @@
-
-
 export default function TestPage() {
-    return (
-     
-      123
-      
-    
-    )
+  return 123;
 }
