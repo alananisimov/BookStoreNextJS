@@ -12,7 +12,6 @@ export function useProducts() {
         setLoading(false);
       });
 
-    console.log(response);
     setProducts(response.data);
   }
   useEffect(() => {
