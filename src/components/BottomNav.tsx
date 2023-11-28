@@ -63,7 +63,7 @@ export function BottomNav() {
 
       <div className="btm-nav btm-nav-sm">
         <button
-          className="active"
+          className=""
           onClick={() => {
             router.push("/");
           }}

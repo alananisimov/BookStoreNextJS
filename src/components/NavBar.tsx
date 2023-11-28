@@ -11,11 +11,12 @@ import { MyProduct } from "@/app/models";
 import { supabase } from "@/app/data/SupabaseClient";
 import { useSession } from "@/app/hooks/session_data";
 import { Icon } from "@iconify/react";
+import { useReviews } from "@/app/hooks/reviews";
 export default function Example() {
   const [Myitems, setItems] = useLocalStorage<Object[]>("items", []);
   const cart_items = useReadLocalStorage<MyProduct[]>("items");
   const [cart_price, setCartPrice] = useState(0);
-
+  const { reviews, Loading } = useReviews();
   function clearCart() {
     setItems([]);
     setCartPrice(0);

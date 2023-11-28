@@ -16,8 +16,8 @@ export default function ReviewItem({
           <Image
             src={review_props.avatar_url}
             alt="review user avatar"
-            height={540}
-            width={360}
+            height={96}
+            width={96}
           />
         </div>
       </div>

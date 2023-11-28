@@ -1,5 +1,3 @@
-"use client";
-/* eslint-disable @next/next/no-img-element */
 import { MyProduct } from "../app/models";
 import { useState } from "react";
 import { useProducts } from "../app/hooks/products";

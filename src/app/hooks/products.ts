@@ -7,7 +7,7 @@ export function useProducts() {
   async function FetchProducts() {
     setLoading(true);
     const response = await axios
-      .get<MyProduct[]>("https://api.bookconer.site/products", {})
+      .get<MyProduct[]>("https://api.bookconer.site" + "/products", {})
       .finally(() => {
         setLoading(false);
       });

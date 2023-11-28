@@ -5,7 +5,6 @@ import { MyProduct } from "../models";
 function RemoveItem({ name, symbol }: { name: string; symbol: string }) {
   const [items, setItems] = useLocalStorage<MyProduct[]>("items", []);
 
-  // Ищем индекс элемента с заданным именем
   const index = items.findIndex((item) => item.title === name);
 
   const removeFromLocalStorage = () => {
@@ -21,7 +20,7 @@ function RemoveItem({ name, symbol }: { name: string; symbol: string }) {
         onClick={removeFromLocalStorage}
         className="inline-flex w-fit m-1 items-center text-center justify-center"
       >
-        {String(symbol)} {/* Преобразование символа в строку */}
+        {String(symbol)}
       </span>
     </div>
   );

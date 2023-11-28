@@ -12,6 +12,7 @@ export default function Review({
   review_props: ReviewProps;
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  console.log(review_props);
   const [isLoaded, setLoaded] = useState(false);
   return (
     <>
@@ -39,7 +40,7 @@ export default function Review({
             onLoad={() => setLoaded(true)}
             width={360}
             height={540}
-            className="mx-auto w-1/3 group-hover:blur-sm"
+            className="mx-auto sm:w-1/2 w-full group-hover:blur-sm"
           />
         </Skeleton>
 
@@ -55,9 +56,6 @@ export default function Review({
         <span className="font-bold">От покупателя:</span>
         {" " + review_props.text}
       </div>
-      <button className="bottom-0 right-0 left-0 mt-10 flex items-center justify-center rounded-md bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 m-4">
-        Посмотреть все отзывы
-      </button>
     </>
   );
 }

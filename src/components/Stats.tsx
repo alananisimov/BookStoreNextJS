@@ -2,6 +2,10 @@
 import { MyProduct, ReviewProps } from "@/app/models";
 import { StarIcon } from "@heroicons/react/24/solid";
 import Review from "./Review";
+import Image from "next/image";
+import { useReviews } from "@/app/hooks/reviews";
+import { Skeleton } from "@chakra-ui/react";
+import { useState } from "react";
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
@@ -20,16 +24,18 @@ function getRatingDescription(rating: number) {
 }
 export function Stats({ product_props }: { product_props: MyProduct }) {
   const description = getRatingDescription(product_props.rate);
-  const testReview: ReviewProps = {
-    name: "Alexander",
-    date: "",
-    header: "",
-    photo_url: "https://placehold.co/360x540/png",
-    stars: 4,
-    text: "Очень хорошая книга! Моему сыну как раз по душе. Читаем всей семьей",
-    avatar_url:
-      "https://fastly.picsum.photos/id/1/200/200.jpg?hmac=jZB9EZ0Vtzq-BZSmo7JKBBKJLW46nntxq79VMkCiBG8",
-  };
+  const [isLoaded, setLoading] = useState(Boolean);
+  // const testReview: ReviewProps = {
+  //   name: "Alexander",
+  //   date: "",
+  //   header: "",
+  //   photo_url: "https://placehold.co/360x540/png",
+  //   stars: 4,
+  //   text: "Очень хорошая книга! Моему сыну как раз по душе. Читаем всей семьей",
+  //   avatar_url:
+  //     "https://fastly.picsum.photos/id/1/200/200.jpg?hmac=jZB9EZ0Vtzq-BZSmo7JKBBKJLW46nntxq79VMkCiBG8",
+  // };
+  const { reviews, Loading } = useReviews();
   return (
     <>
       <div className="hidden sm:flex flex-col w-full">
@@ -49,17 +55,26 @@ export function Stats({ product_props }: { product_props: MyProduct }) {
             Last updated 5 mins ago
           </p>
         </div>
-        <div className="carousel carousel-center px-4 space-x-3 bg-transparent">
-          {[...Array(8)].map((e, i) => (
-            <div className="carousel-item" key={i}>
-              <img
-                src="https://fastly.picsum.photos/id/283/200/300.jpg?hmac=HVbRBUPQVx2vypDRbrSdilx6LhDFbU9jsqNdlKR9J9I"
-                className="rounded-lg w-20 h-20"
-              />
-            </div>
+        <div className="carousel carousel-center px-4 space-x-3 bg-transparent border-1 border-gray-600">
+          {reviews.map((e, i) => (
+            <Skeleton key={i} isLoaded={!Loading}>
+              <div className="carousel-item bg-gray-600/75">
+                <Image
+                  src={e.photo_url}
+                  height={150}
+                  width={150}
+                  alt={product_props.title}
+                />
+              </div>
+            </Skeleton>
           ))}
         </div>
-        <Review review_props={testReview} />
+        {reviews.map((e, i) => (
+          <Review review_props={e} key={i} />
+        ))}
+        <button className="bottom-0 right-0 left-0 mt-10 flex items-center justify-center rounded-md bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 m-4">
+          Посмотреть все отзывы
+        </button>
       </div>
 
       <div className="flex sm:hidden flex-col bg-white border shadow-sm rounded-xl dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7]">
@@ -80,17 +95,24 @@ export function Stats({ product_props }: { product_props: MyProduct }) {
           </p>
         </div>
         <div className="carousel carousel-center max-w-md p-4 space-x-4 bg-transparent rounded-box mr-4">
-          {[...Array(8)].map((e, i) => (
+          {reviews.map((e, i) => (
             <div className="carousel-item relative w-20 h-20" key={i}>
-              <img
-                src="https://fastly.picsum.photos/id/1029/200/300.jpg?hmac=VpePgDBTGFZYhRTeOD9o6nCvZB_01SrIHCMMkoZal_A"
-                alt="Pizza"
+              <Image
+                src={e.photo_url}
+                alt={e.header}
                 className="rounded-xl w-20 h-20"
+                height={80}
+                width={80}
               />
             </div>
           ))}
         </div>
-        <Review review_props={testReview} />
+        {reviews.map((e, i) => (
+          <Review review_props={e} key={i} />
+        ))}
+        <button className="bottom-0 right-0 left-0 mt-10 flex items-center justify-center rounded-md bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 m-4">
+          Посмотреть все отзывы
+        </button>
       </div>
     </>
   );

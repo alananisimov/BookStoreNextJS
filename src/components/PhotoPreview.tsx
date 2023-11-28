@@ -9,7 +9,7 @@ import {
   Button,
   useDisclosure,
 } from "@chakra-ui/react";
-
+import Image from "next/image";
 export default function PhotoPreview({
   photo_url,
   author_name,
@@ -30,8 +30,14 @@ export default function PhotoPreview({
         <ModalHeader>{author_name}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <div className="w-full h-full">
-            <img src={photo_url} className="mx-auto" />
+          <div className="w-2/3 h-full mx-auto">
+            <Image
+              src={photo_url}
+              className="mx-auto"
+              alt={author_name}
+              width={450}
+              height={450}
+            />
           </div>
         </ModalBody>
         <ModalFooter>
